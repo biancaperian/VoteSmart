@@ -3,6 +3,15 @@ package Tema1;
 public class Alegere {
     private String id;
     private String nume;
+    private String curent;
+
+    public String getCurent() {
+        return curent;
+    }
+
+    public void setCurent(String curent) {
+        this.curent = curent;
+    }
 
     public String getId() {
         return id;
@@ -23,11 +32,13 @@ public class Alegere {
     Alegere() {
         this.id = null;
         this.nume = null;
+        this.curent = "NEINCEPUT";
     }
 
-    Alegere(String id, String nume) {
+    Alegere(String id, String nume, String curent) {
         this.id = id;
         this.nume = nume;
+        this.curent = "NEINCEPUT";
     }
 
     public int verificareId(String id) {
@@ -35,6 +46,10 @@ public class Alegere {
             return 1; // id ul nu este unic -> nu adaugam
         }
         return 0; // id ul este unic -> adaugam
+    }
+
+    public void pornireAlegere() {
+        this.curent = "INCEPUT";
     }
 
 }

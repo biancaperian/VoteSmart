@@ -24,6 +24,12 @@ public class App {
                 String name = scanner.nextLine(); // citeste numele de unde s a terminat id ul
                 System.out.println(alegeri.adaugareAlegere(alegeri.listaAlegeri, id, name));
             }
+
+            if (nrTasks == 1) {
+                String id = scanner.nextLine();
+                System.out.println(alegeri.verificarePornireAlegere(alegeri.listaAlegeri, id ));
+            }
+
             if (nrTasks == 18) {
                 break;
             }

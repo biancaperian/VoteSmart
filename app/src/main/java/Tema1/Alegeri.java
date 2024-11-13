@@ -12,11 +12,26 @@ public class Alegeri {
                 return "EROARE: Deja exista alegeri cu id " + id + "\n";
             }
         }
-        Alegere alegere = new Alegere(id, nume);
+        Alegere alegere = new Alegere(id, nume, "NEINCEPUT");
         listaAlegeri.add(alegere);
         return "S-au creat alegerile" + nume + "\n";
     }
 
+    public String verificarePornireAlegere(ArrayList<Alegere> listaAlegeri, String id) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                if (a.getCurent().equals("NEINCEPUT") == true) {
+                    a.pornireAlegere();
+                    return "Au pornit alegerile" + a.getNume() + "\n";
+                }
+                else {
+                    return "EROARE: Alegerile deja au inceput" + "\n";
+                }
+            }
+        }
+
+        return "EROARE: Nu exista alegeri cu acest id" + "\n";
+    }
 
 
 
