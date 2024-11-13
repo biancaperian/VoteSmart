@@ -56,6 +56,13 @@ public class App {
                 System.out.println(alegeri.adaugareCandidat(alegeri.listaAlegeri, id, CNP, varsta, nume));
             }
 
+            if (nrTask == 5) {
+                String id = scanner.next();
+                String CNP = scanner.nextLine();
+                CNP = CNP.trim();
+                System.out.println(alegeri.eliminareCandidat(alegeri.listaAlegeri, id, CNP));
+            }
+
             if (nrTask == 18) {
                 break;
             }

@@ -82,5 +82,25 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    public String eliminareCandidat(ArrayList<Alegere> listaAlegeri, String id, String CNP) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                if (a.getCurent().equals("NEINCEPUT") == true) {
+                    return "EROARE: Nu este perioada de votare";
+                }
+                if (a.getCurent().equals("NEINCEPUT") == false) {
+                    for (Candidat candidat : a.listaCandidati) {
+                        if (candidat.getCNP().equals(CNP) == true) {
+                            a.listaCandidati.remove(candidat);
+                            return "S-a sters candidatul" + candidat.getNume();
+                        }
+                    }
+                    return "EROARE: Nu exista un candidat cu CNP-ul " + CNP + "\n";
+                }
+            }
+        }
+        return "EROARE: Nu exista alegeri cu acest id";
+    }
+
 
 }
