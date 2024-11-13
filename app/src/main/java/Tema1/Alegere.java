@@ -53,7 +53,7 @@ public class Alegere {
     }
 
     public void pornireAlegere() {
-        this.curent = "INCEPUT";
+        this.curent = "IN_CURS";
     }
 
     public int verificareCircumscriptie(String numeCircumsriptie) {
@@ -77,5 +77,19 @@ public class Alegere {
         Circumscriptie circ =  new Circumscriptie(numeCircumscriptie, numeRegiune);
         alegere.listaCircumscriptii.add(circ);
         return "S-a adaugat circumscriptia " + numeCircumscriptie;
+    }
+
+    public String eliminareCircumscriptie(Alegere alegere, String numeCirc) {
+
+        if (alegere.verificareCircumscriptie(numeCirc) == 1 && alegere.curent.equals("IN_CURS") == true) {
+            alegere.listaCircumscriptii.remove(alegere);
+            return "S-a sters circumscriptia " + numeCirc;
+        }
+
+        if (alegere.curent.equals("IN_CURS") == false) {
+            return "EROARE: Nu este perioada de votare";
+        }
+
+        return "EROARE: Nu exista o circumscriptie cu numele " + numeCirc;
     }
 }

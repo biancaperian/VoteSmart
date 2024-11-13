@@ -17,20 +17,20 @@ public class App {
         // Pentru citirea datelor de la tastatura se folosește câmpul scanner.
         Alegeri alegeri = new Alegeri();
         while (true) {
-            int nrTasks = scanner.nextInt();
+            int nrTask = scanner.nextInt();
             scanner.nextLine();
-            if (nrTasks == 0) {
+            if (nrTask == 0) {
                 String id = scanner.next(); // citeste id ul
                 String nume = scanner.nextLine(); // citeste numele de unde s a terminat id ul
                 System.out.println(alegeri.adaugareAlegere(alegeri.listaAlegeri, id, nume));
             }
 
-            if (nrTasks == 1) {
+            if (nrTask == 1) {
                 String id = scanner.nextLine();
                 System.out.println(alegeri.verificarePornireAlegere(alegeri.listaAlegeri, id ));
             }
 
-            if (nrTasks == 2) {
+            if (nrTask == 2) {
                 String id = scanner.next();
                 String nume = scanner.next();
                 String regiune = scanner.nextLine();
@@ -40,7 +40,15 @@ public class App {
                 System.out.println(alegeri.verificareIdAdaugareCircumscriptie(alegeri.listaAlegeri, id, nume, regiune));
             }
 
-            if (nrTasks == 18) {
+            if (nrTask == 3) {
+                String id = scanner.next();
+                String nume = scanner.next();
+                id = id.trim();
+                nume = nume.trim();
+                System.out.println(alegeri.verificareIdEliminareCircumscriptie(alegeri.listaAlegeri, id, nume));
+            }
+
+            if (nrTask == 18) {
                 break;
             }
         }

@@ -42,5 +42,14 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    public String verificareIdEliminareCircumscriptie(ArrayList<Alegere> listaAlegeri, String id, String numeCirc) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                String rezultat = a.eliminareCircumscriptie(a, numeCirc);
+                return rezultat;
+            }
+        }
+        return "EROARE: Nu exista alegeri cu acest id";
+    }
 
 }
