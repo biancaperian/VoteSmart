@@ -21,13 +21,23 @@ public class App {
             scanner.nextLine();
             if (nrTasks == 0) {
                 String id = scanner.next(); // citeste id ul
-                String name = scanner.nextLine(); // citeste numele de unde s a terminat id ul
-                System.out.println(alegeri.adaugareAlegere(alegeri.listaAlegeri, id, name));
+                String nume = scanner.nextLine(); // citeste numele de unde s a terminat id ul
+                System.out.println(alegeri.adaugareAlegere(alegeri.listaAlegeri, id, nume));
             }
 
             if (nrTasks == 1) {
                 String id = scanner.nextLine();
                 System.out.println(alegeri.verificarePornireAlegere(alegeri.listaAlegeri, id ));
+            }
+
+            if (nrTasks == 2) {
+                String id = scanner.next();
+                String nume = scanner.next();
+                String regiune = scanner.nextLine();
+                id = id.trim();
+                nume = nume.trim();
+                regiune = regiune.trim();
+                System.out.println(alegeri.verificareIdAdaugareCircumscriptie(alegeri.listaAlegeri, id, nume, regiune));
             }
 
             if (nrTasks == 18) {

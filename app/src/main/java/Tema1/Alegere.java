@@ -1,9 +1,13 @@
 package Tema1;
 
+import java.util.ArrayList;
+
 public class Alegere {
     private String id;
     private String nume;
     private String curent;
+
+    ArrayList<Circumscriptie> listaCircumscriptii =  new ArrayList();
 
     public String getCurent() {
         return curent;
@@ -52,4 +56,26 @@ public class Alegere {
         this.curent = "INCEPUT";
     }
 
+    public int verificareCircumscriptie(String numeCircumsriptie) {
+        for (Circumscriptie circ : listaCircumscriptii) {
+            if (circ.getNume().equals(numeCircumsriptie) == true) {
+                return 1; // circumscriptia exista -> nu adaugam
+            }
+        }
+        return 0; //circumscriptia nu exista -> o adaugam
+    }
+
+    public String adaugareCircumscriptie(Alegere alegere, String numeCircumscriptie, String numeRegiune) {
+        if (alegere.verificareCircumscriptie(numeCircumscriptie) == 1) {
+            return "EROARE: Deja exista o circumscriptie cu numele " + numeCircumscriptie;
+        }
+
+        if (alegere.curent.equals("NEINCEPUT") == true) {
+            return "EROARE: Nu este perioada de votare";
+        }
+
+        Circumscriptie circ =  new Circumscriptie(numeCircumscriptie, numeRegiune);
+        alegere.listaCircumscriptii.add(circ);
+        return "S-a adaugat circumscriptia " + numeCircumscriptie;
+    }
 }
