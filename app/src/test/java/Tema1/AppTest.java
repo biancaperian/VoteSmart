@@ -190,7 +190,7 @@ public class AppTest {
         if (output.contains("EROARE: Nu exista o circumscriptie cu numele Bucuresti")) {
             assertTrue(true);
         } else {
-            fail(output);
+              fail(output);
         }
     }
 

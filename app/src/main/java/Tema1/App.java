@@ -15,6 +15,20 @@ public class App {
     public void run() {
         // Implementați aici cerințele din enunț
         // Pentru citirea datelor de la tastatura se folosește câmpul scanner.
+        Alegeri alegeri = new Alegeri();
+        while (true) {
+            int nrTasks = scanner.nextInt();
+            scanner.nextLine();
+            if (nrTasks == 0) {
+                String id = scanner.next(); // citeste id ul
+                String name = scanner.nextLine(); // citeste numele de unde s a terminat id ul
+                System.out.println(alegeri.adaugareAlegere(alegeri.listaAlegeri, id, name));
+            }
+            if (nrTasks == 18) {
+                break;
+            }
+        }
+        scanner.close();
     }
 
     public static void main(String[] args) {
