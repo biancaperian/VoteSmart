@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Alegeri {
     ArrayList<Alegere> listaAlegeri = new ArrayList<Alegere>();
+    
 
     public String adaugareAlegere(ArrayList<Alegere> listaAlegeri, String id, String nume) {
         for (Alegere a : listaAlegeri) {
@@ -51,5 +52,35 @@ public class Alegeri {
         }
         return "EROARE: Nu exista alegeri cu acest id";
     }
+
+    public String adaugareCandidat (ArrayList<Alegere> listaAlegeri, String id, String CNP, int varsta, String nume) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                    if (a.getCurent().equals("NEINCEPUT") == true) {
+                        return "EROARE: Nu este perioada de votare";
+                    }
+                    if (a.getCurent().equals("NEINCEPUT") == false) {
+                        if (CNP.length() != 13) {
+                            return "EROARE: CNP invalid";
+                        }
+
+                        if (varsta < 35) {
+                            return "EROARE: Varsta invalida";
+                        }
+
+                        for (Candidat candidat : a.listaCandidati) {
+                            if (candidat.getCNP().equals(CNP) == true) {
+                                return "EROARE: Candidatul" + nume + " are deja acelasi CNP";
+                            }
+                        }
+                        Candidat candidat = new Candidat(nume, CNP, varsta);
+                        a.listaCandidati.add(candidat);
+                    }
+                    return "S-a adaugat candidatul" + nume;
+            }
+        }
+        return "EROARE: Nu exista alegeri cu acest id";
+    }
+
 
 }

@@ -30,5 +30,7 @@ public class Circumscriptie {
         this.regiune = regiune;
     }
 
+
+
 }
 

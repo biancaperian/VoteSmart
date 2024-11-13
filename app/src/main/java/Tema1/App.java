@@ -48,6 +48,14 @@ public class App {
                 System.out.println(alegeri.verificareIdEliminareCircumscriptie(alegeri.listaAlegeri, id, nume));
             }
 
+            if (nrTask == 4) {
+                String id = scanner.next();
+                String CNP = scanner.next();
+                int varsta = scanner.nextInt();
+                String nume = scanner.nextLine();
+                System.out.println(alegeri.adaugareCandidat(alegeri.listaAlegeri, id, CNP, varsta, nume));
+            }
+
             if (nrTask == 18) {
                 break;
             }

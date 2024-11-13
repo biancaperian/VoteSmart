@@ -8,6 +8,7 @@ public class Alegere {
     private String curent;
 
     ArrayList<Circumscriptie> listaCircumscriptii =  new ArrayList();
+    ArrayList<Candidat> listaCandidati =  new ArrayList();
 
     public String getCurent() {
         return curent;
@@ -92,4 +93,5 @@ public class Alegere {
 
         return "EROARE: Nu exista o circumscriptie cu numele " + numeCirc;
     }
+
 }
