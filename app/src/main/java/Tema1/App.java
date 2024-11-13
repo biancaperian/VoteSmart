@@ -60,6 +60,7 @@ public class App {
                 String id = scanner.next();
                 String CNP = scanner.nextLine();
                 CNP = CNP.trim();
+
                 System.out.println(alegeri.eliminareCandidat(alegeri.listaAlegeri, id, CNP));
             }
 
