@@ -79,6 +79,12 @@ public class App {
                 alegeri.printareCandidatiDinAlegeri(alegeri.listaAlegeri, id);
             }
 
+            if (nrTask == 8) {
+                String id = scanner.next();
+                String numeCirc = scanner.nextLine();
+                alegeri.printareVotantiDinCircumscriptie(alegeri.listaAlegeri, id, numeCirc);
+            }
+
             if (nrTask == 18) {
                 break;
             }

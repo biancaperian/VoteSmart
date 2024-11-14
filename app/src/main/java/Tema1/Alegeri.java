@@ -159,4 +159,37 @@ public class Alegeri {
         return ;
     }
 
+    public void printareVotantiDinCircumscriptie(ArrayList<Alegere> listaAlegeri, String id, String numeCirc) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                boolean gasitCirc = false;
+                if (a.getCurent().equals("NEINCEPUT") == true) {
+                    System.out.println("EROARE: Nu au inceput inca alegerile");
+                    return ;
+                }
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    if (circ.getNume().trim().equals(numeCirc.trim()) == true) {
+                        gasitCirc = true;
+                        if (circ.listaVotanti.size() == 0) {
+                            System.out.println("GOL: Nu sunt votanti in" + numeCirc);
+                            return ;
+                        } else {
+                            System.out.println("Votantii din" + numeCirc + ":\n");
+                            for (Votant votant : circ.listaVotanti) {
+                                System.out.println(votant.getNume() + " " + votant.getCNP() + " " + votant.getVarsta() + " \n");
+                            }
+                            return ;
+                        }
+                    }
+                }
+                if (gasitCirc == false) {
+                    System.out.println("EROARE: Nu exista o circumscriptie cu numele" + numeCirc);
+                    return ;
+                }
+            }
+        }
+        System.out.println("EROARE: Nu exista alegeri cu acest id");
+        return ;
+    }
+
 }
