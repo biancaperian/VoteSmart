@@ -74,6 +74,11 @@ public class App {
                 System.out.println(alegeri.adaugareVotant(alegeri.listaAlegeri, id, circ, CNP, varsta, neindemanatic, nume));
             }
 
+            if (nrTask == 7) {
+                String id = scanner.nextLine();
+                alegeri.printareCandidatiDinAlegeri(alegeri.listaAlegeri, id);
+            }
+
             if (nrTask == 18) {
                 break;
             }

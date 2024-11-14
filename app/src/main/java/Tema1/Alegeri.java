@@ -102,7 +102,6 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
-
     public String adaugareVotant(ArrayList<Alegere> listaAlegeri, String id, String numeCirc, String CNP, int varsta, String neindemanatic, String nume) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -135,6 +134,29 @@ public class Alegeri {
             }
         }
         return "EROARE: Nu exista alegeri cu acest id";
+    }
+
+    public void printareCandidatiDinAlegeri(ArrayList<Alegere> listaAlegeri, String id) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                if (a.getCurent().equals("NEINCEPUT") == true) {
+                    System.out.println("EROARE: Nu au inceput inca alegerile");
+                    return ;
+                }
+                if (a.listaCandidati.size() == 0) {
+                    System.out.println("GOL: Nu sunt candidati");
+                    return ;
+                } else {
+                    System.out.println("Candidatii:\n");
+                    for (Candidat candidat : a.listaCandidati) {
+                        System.out.println(candidat.getNume() + " " + candidat.getCNP() + " " + candidat.getVarsta() + " \n");
+                    }
+                    return ;
+                }
+            }
+        }
+        System.out.println("EROARE: Nu exista alegeri cu acest id");
+        return ;
     }
 
 }
