@@ -103,4 +103,38 @@ public class Alegeri {
     }
 
 
+    public String adaugareVotant(ArrayList<Alegere> listaAlegeri, String id, String numeCirc, String CNP, int varsta, String neindemanatic, String nume) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                boolean gasitCirc = false;
+                if (a.getCurent().equals("NEINCEPUT") == true) {
+                    return "EROARE: Nu este perioada de votare";
+                }
+                if (CNP.length() != 13) {
+                    return "EROARE: CNP invalid";
+                }
+                if (varsta < 18) {
+                    return "EROARE: Varsta invalida";
+                }
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    if (circ.getNume().equals(numeCirc) == true) {
+                        gasitCirc = true;
+                        for (Votant votant : circ.listaVotanti) {
+                            if (votant.getCNP().equals(CNP) == true) {
+                                return "EROARE: Votantul" + votant.getNume() + " are deja acelasi CNP";
+                            }
+                        }
+                        circ.listaVotanti.add(new Votant(nume, CNP, varsta, neindemanatic));
+                        return "S-a adaugat votantul" + nume;
+                    }
+                }
+                if (gasitCirc == false) {
+                    return "EROARE: Nu exista o circumscriptie cu numele " + numeCirc;
+                }
+
+            }
+        }
+        return "EROARE: Nu exista alegeri cu acest id";
+    }
+
 }

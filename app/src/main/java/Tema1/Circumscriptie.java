@@ -1,8 +1,12 @@
 package Tema1;
 
+import java.util.ArrayList;
+
 public class Circumscriptie {
     private String nume;
     private String regiune;
+
+    ArrayList<Votant> listaVotanti = new ArrayList();
 
     Circumscriptie() {
         this.nume = null;

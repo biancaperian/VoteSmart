@@ -64,6 +64,16 @@ public class App {
                 System.out.println(alegeri.eliminareCandidat(alegeri.listaAlegeri, id, CNP));
             }
 
+            if (nrTask == 6) {
+                String id = scanner.next();
+                String circ = scanner.next();
+                String CNP = scanner.next();
+                int varsta = scanner.nextInt();
+                String neindemanatic = scanner.next();
+                String nume = scanner.nextLine();
+                System.out.println(alegeri.adaugareVotant(alegeri.listaAlegeri, id, circ, CNP, varsta, neindemanatic, nume));
+            }
+
             if (nrTask == 18) {
                 break;
             }
