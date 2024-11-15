@@ -85,6 +85,14 @@ public class App {
                 alegeri.printareVotantiDinCircumscriptie(alegeri.listaAlegeri, id, numeCirc);
             }
 
+            if (nrTask == 9) {
+                String id = scanner.next();
+                String numeCirc = scanner.next();
+                String CNP_votant = scanner.next();
+                String CNP_candidat = scanner.nextLine();
+                System.out.println(alegeri.votare(alegeri.listaAlegeri, id, numeCirc, CNP_votant, CNP_candidat));
+            }
+
             if (nrTask == 18) {
                 break;
             }

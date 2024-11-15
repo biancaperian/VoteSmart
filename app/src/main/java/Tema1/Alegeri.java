@@ -123,7 +123,7 @@ public class Alegeri {
                                 return "EROARE: Votantul" + votant.getNume() + " are deja acelasi CNP";
                             }
                         }
-                        circ.listaVotanti.add(new Votant(nume, CNP, varsta, neindemanatic));
+                        circ.listaVotanti.add(new Votant(nume, CNP, varsta, neindemanatic, false));
                         return "S-a adaugat votantul" + nume;
                     }
                 }
@@ -190,6 +190,67 @@ public class Alegeri {
         }
         System.out.println("EROARE: Nu exista alegeri cu acest id");
         return ;
+    }
+
+    public String votare(ArrayList<Alegere> listaAlegeri, String id, String numeCirc, String CNP_votant, String CNP_candidat) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                boolean gasitCirc = false;
+                if (a.getCurent().equals("NEINCEPUT") == true) {
+                    return "EROARE: Nu este perioada de votare";
+                }
+                boolean existentaVotant = false;
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    for (Votant votant : circ.listaVotanti) {
+                        if (votant.getCNP().trim().equals(CNP_votant.trim()) == true) {
+                            existentaVotant = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (existentaVotant == false) {
+                    return "EROARE: Nu exista un votant cu CNP-ul " + CNP_votant;
+                }
+
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    if (circ.getNume().trim().equals(numeCirc.trim()) == true) {
+                        gasitCirc = true;
+                        boolean gasitVotant = false;
+                        for (Votant votant : circ.listaVotanti) {
+                            if (votant.getCNP().trim().equals(CNP_votant.trim()) == true) {
+                                gasitVotant = true;
+                                if (votant.getVotat() == true) {
+                                    return "FRAUDA: Votantul cu CNP-ul " + CNP_votant + " a incercat sa comita o frauda. Votul a fost anulat.";
+                                }
+                                boolean gasitCandidat = false;
+                                for (Candidat candidat : a.listaCandidati) {
+                                    if (candidat.getCNP().trim().equals(CNP_candidat.trim()) == true) {
+                                        gasitCandidat = true;
+                                        votant.setVotat(true);
+                                        return votant.getNume() + " a votat pentru" + candidat.getNume();
+                                    }
+                                }
+
+                                if (gasitCandidat == false) {
+                                    return "EROARE: Nu exista un candidat cu CNP-ul" + CNP_candidat;
+                                }
+                            }
+                        }
+
+                        if (gasitVotant == false) {
+                            return "FRAUDA: Votantul cu CNP-ul " + CNP_votant + " a incercat sa comita o frauda. Votul a fost anulat.";
+                        }
+                    }
+                }
+
+                if (gasitCirc == false) {
+                    return "EROARE: Nu exista o circumscriptie cu numele " + numeCirc;
+                }
+
+            }
+        }
+        return "EROARE: Nu exista alegeri cu acest id";
     }
 
 }
