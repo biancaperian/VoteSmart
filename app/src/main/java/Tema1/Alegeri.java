@@ -253,4 +253,18 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    public String oprireAlegeri(ArrayList<Alegere> listaAlegeri, String id) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                if (a.getCurent().equals("IN_CURS") == false) {
+                    return "EROARE: Nu este perioada de votare";
+                }
+
+                a.setCurent("TERMINAT");
+                return "S-au terminat alegerile" + a.getNume();
+            }
+        }
+        return "EROARE: Nu exista alegeri cu acest id";
+    }
+
 }

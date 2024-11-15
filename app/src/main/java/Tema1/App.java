@@ -93,6 +93,11 @@ public class App {
                 System.out.println(alegeri.votare(alegeri.listaAlegeri, id, numeCirc, CNP_votant, CNP_candidat));
             }
 
+            if (nrTask == 10) {
+                String id = scanner.nextLine();
+                System.out.println(alegeri.oprireAlegeri(alegeri.listaAlegeri, id));
+            }
+
             if (nrTask == 18) {
                 break;
             }
