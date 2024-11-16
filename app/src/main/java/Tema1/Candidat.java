@@ -1,8 +1,8 @@
 package Tema1;
 
-public class Candidat extends Persoana {
+public class Candidat extends Persoana implements Comparable<Candidat> {
 
-    private static int numarVoturi = 0;
+    private int numarVoturi = 0;
 
     Candidat() {
         super();
@@ -12,12 +12,20 @@ public class Candidat extends Persoana {
         super(nume, CNP, varsta);
     }
 
-    public int getnrVoturi() {
+    public int getNrVoturi() {
         return this.numarVoturi;
     }
 
     public void crestereNrVoturi() {
         this.numarVoturi++;
+    }
+
+    public int compareTo(Candidat altCandidat) {
+        int rezultat =  Integer.compare(this.numarVoturi, altCandidat.numarVoturi);
+        if (rezultat == 0) {
+            return this.getCNP().compareTo(altCandidat.getCNP());
+        }
+        return rezultat;
     }
 
 }

@@ -328,4 +328,39 @@ public class Alegeri {
         System.out.println("EROARE: Nu exista alegeri cu acest id");
         return ;
     }
+
+    public void raportVoturiNationale(ArrayList<Alegere> listaAlegeri, String id) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                if (a.getCurent().equals("TERMINAT") == false) {
+                    System.out.println("EROARE: Inca nu s-a terminat votarea");
+                    return ;
+                }
+                int numarVoturi = 0;
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    for (Candidat candidat : circ.listaCandidatiVotati) {
+                        numarVoturi++;
+                    }
+                }
+
+                if (numarVoturi == 0) {
+                    System.out.println("GOL: Lumea nu isi exercita dreptul de vot in Romania");
+                    return ;
+                }
+
+                Collections.sort(a.listaCandidati);
+
+                System.out.println("Raport voturi Romania:");
+                for (Candidat candidat : a.listaCandidati) {
+                    System.out.println(candidat.getNume().trim() + " " + candidat.getCNP() + " - " +candidat.getNrVoturi());
+                }
+                return ;
+
+
+            }
+        }
+        System.out.println("EROARE: Nu exista alegeri cu acest id");
+        return ;
+    }
+
 }

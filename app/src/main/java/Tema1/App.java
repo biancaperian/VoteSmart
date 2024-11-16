@@ -104,6 +104,12 @@ public class App {
                 alegeri.raportVoturi(alegeri.listaAlegeri, id, numeCirc);
             }
 
+            if (nrTask == 12) {
+                String id = scanner.next();
+                alegeri.raportVoturiNationale(alegeri.listaAlegeri, id);
+
+            }
+
             if (nrTask == 18) {
                 break;
             }
