@@ -94,4 +94,11 @@ public class Alegere {
         return "EROARE: Nu exista o circumscriptie cu numele " + numeCirc;
     }
 
+    public int totalVoturiNationale() {
+        int numarVoturi = 0;
+        for (Candidat candidat : listaCandidati) {
+            numarVoturi += candidat.getNrVoturi();
+        }
+        return numarVoturi;
+    }
 }

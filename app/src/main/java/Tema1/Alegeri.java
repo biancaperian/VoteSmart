@@ -363,4 +363,56 @@ public class Alegeri {
         return ;
     }
 
+    public String analizaDetaliataCircumscriptie(ArrayList<Alegere> listaAlegeri, String id, String numeCirc) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                if (a.getCurent().equals("TERMINAT") == false) {
+                    return "EROARE: Inca nu s-a terminat votarea";
+                }
+
+                boolean gasitCirc = false;
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    if (circ.getNume().trim().equals(numeCirc.trim())) {
+                        gasitCirc = true;
+                        if (circ.listaCandidatiVotati.size() == 0) {
+                            return "GOL: Lumea nu isi exercita dreptul de vot in" + numeCirc;
+                        }
+
+                        for (Candidat candidat : circ.listaCandidatiVotati) {
+                            boolean gasitCandidat = false;
+                            for (Vot vot : circ.listaVoturi) {
+                                if (candidat.getNume().trim().equals(vot.candidat.getNume().trim()) == true) {
+                                    gasitCandidat = true;
+                                    vot.adaugaVotCirc();
+                                    break;
+                                }
+                            }
+                            if (gasitCandidat == false) {
+                                Vot votNou = new Vot(candidat);
+                                circ.listaVoturi.add(votNou);
+                                votNou.adaugaVotCirc();
+                            }
+
+                            Collections.sort(circ.listaVoturi);
+
+                        }
+
+                        int numarVoturiNationale = a.totalVoturiNationale();
+                        int procentajVoturiCirc = (circ.listaCandidatiVotati.size() * 100) / numarVoturiNationale;
+                        Collections.sort(circ.listaVoturi);
+                        int procentajVoturiCandidat = (circ.listaVoturi.get(0).getNrVoturiCirc() * 100) / circ.listaCandidatiVotati.size();
+
+                        return "In" + numeCirc + " au fost " + circ.listaCandidatiVotati.size() + " voturi din " + numarVoturiNationale + ". Adica " + procentajVoturiCirc + "%. Cele mai multe voturi au fost stranse de " + circ.listaVoturi.get(1).candidat.getCNP() + circ.listaVoturi.get(1).candidat.getNume() + ". Acestea constituie " + procentajVoturiCandidat + "% din voturile circumscriptiei.";
+
+                    }
+                }
+
+                if (gasitCirc == false) {
+                    return "EROARE: Nu exista o circumscriptie cu numele" + numeCirc;
+                }
+            }
+        }
+        return "EROARE: Nu exista alegeri cu acest id";
+    }
+
 }

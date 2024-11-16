@@ -107,7 +107,12 @@ public class App {
             if (nrTask == 12) {
                 String id = scanner.next();
                 alegeri.raportVoturiNationale(alegeri.listaAlegeri, id);
+            }
 
+            if (nrTask == 13) {
+                String id = scanner.next();
+                String numeCirc = scanner.nextLine();
+                System.out.println(alegeri.analizaDetaliataCircumscriptie(alegeri.listaAlegeri, id, numeCirc));
             }
 
             if (nrTask == 18) {

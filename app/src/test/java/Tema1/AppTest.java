@@ -1484,7 +1484,7 @@ public class AppTest {
         App app = new App(in);
         app.run();
         String output = outputStreamCaptor.toString().trim();
-        String expected = "in Bucuresti au fost 2 voturi din 7. Adica 28%. Cele mai multe voturi au fost stranse de 1234567891239 Dumitru Florin Ionescu2. Acestea constituie 50% din voturile circumscriptiei.";
+        String expected = "In Bucuresti au fost 2 voturi din 7. Adica 28%. Cele mai multe voturi au fost stranse de 1234567891239 Dumitru Florin Ionescu2. Acestea constituie 50% din voturile circumscriptiei.";
         if (output.contains(expected)) {
             assertTrue(true);
         } else {
