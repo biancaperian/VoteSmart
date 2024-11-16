@@ -23,4 +23,12 @@ public class Votant extends Persoana{
     public boolean getVotat() {
         return this.votat;
     }
+
+    public String getNeindemanatic() {
+        return neindemanatic;
+    }
+
+    public void setNeindemanatic(String neindemanatic) {
+        this.neindemanatic = neindemanatic;
+    }
 }

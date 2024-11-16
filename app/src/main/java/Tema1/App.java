@@ -98,6 +98,12 @@ public class App {
                 System.out.println(alegeri.oprireAlegeri(alegeri.listaAlegeri, id));
             }
 
+            if (nrTask == 11) {
+                String id = scanner.next();
+                String numeCirc = scanner.nextLine();
+                alegeri.raportVoturi(alegeri.listaAlegeri, id, numeCirc);
+            }
+
             if (nrTask == 18) {
                 break;
             }

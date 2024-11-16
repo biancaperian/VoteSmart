@@ -1,6 +1,7 @@
 package Tema1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Alegeri {
     ArrayList<Alegere> listaAlegeri = new ArrayList<Alegere>();
@@ -228,6 +229,10 @@ public class Alegeri {
                                     if (candidat.getCNP().trim().equals(CNP_candidat.trim()) == true) {
                                         gasitCandidat = true;
                                         votant.setVotat(true);
+                                        if (votant.getNeindemanatic().equals("da") == true ) {
+                                            candidat.crestereNrVoturi();
+                                        }
+                                       circ.listaCandidatiVotati.add(candidat);
                                         return votant.getNume() + " a votat pentru" + candidat.getNume();
                                     }
                                 }
@@ -267,4 +272,60 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    public void raportVoturi(ArrayList<Alegere> listaAlegeri, String id, String numeCirc) {
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+
+                if (a.getCurent().equals("TERMINAT") == false) {
+                    System.out.println("EROARE: Inca nu s-a terminat votarea");
+                    return ;
+                }
+
+                boolean gasitCirc = false;
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    if (circ.getNume().trim().equals(numeCirc.trim()) == true) {
+                        gasitCirc = true;
+                        if (circ.listaCandidatiVotati.size() == 0) {
+                            System.out.println("GOL: Lumea nu isi exercita dreptul de vot in" + numeCirc);
+                            return ;
+                        }
+
+                        for (Candidat candidat : circ.listaCandidatiVotati) {
+                            boolean gasitCandidat = false;
+                            for (Vot vot : circ.listaVoturi) {
+                                if (candidat.getNume().trim().equals(vot.candidat.getNume().trim()) == true) {
+                                    gasitCandidat = true;
+                                    vot.adaugaVotCirc();
+                                    break;
+                                }
+                            }
+                            if (gasitCandidat == false) {
+                                Vot votNou = new Vot(candidat);
+                                circ.listaVoturi.add(votNou);
+                                votNou.adaugaVotCirc();
+                            }
+
+                            Collections.sort(circ.listaVoturi);
+
+                        }
+
+                        System.out.println("Raport voturi" + numeCirc + ":");
+                        for (Vot vot : circ.listaVoturi) {
+                            System.out.println(vot.candidat.getNume().trim() + " " + vot.candidat.getCNP() + " - " + vot.getNrVoturiCirc());
+                        }
+                        return ;
+
+                    }
+                }
+
+                if (gasitCirc == false) {
+                    System.out.println("EROARE: Nu exista o circumscriptie cu numele" + numeCirc);
+                    return ;
+                }
+
+            }
+        }
+        System.out.println("EROARE: Nu exista alegeri cu acest id");
+        return ;
+    }
 }

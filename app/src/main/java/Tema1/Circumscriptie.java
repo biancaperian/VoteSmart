@@ -7,6 +7,8 @@ public class Circumscriptie {
     private String regiune;
 
     ArrayList<Votant> listaVotanti = new ArrayList();
+    ArrayList<Candidat> listaCandidatiVotati = new ArrayList();
+    ArrayList<Vot> listaVoturi = new ArrayList();
 
     Circumscriptie() {
         this.nume = null;
@@ -33,6 +35,7 @@ public class Circumscriptie {
     public void setRegiune(String regiune) {
         this.regiune = regiune;
     }
+
 
 
 
