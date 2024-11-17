@@ -488,14 +488,14 @@ public class Alegeri {
                     nrVoturiRomania = nrVoturiRomania + analiza.listaCandidatiRegiune.size();
                 }
 
-                System.out.println("in Romania au fost " + nrVoturiRomania + " voturi.");
+                System.out.println("In Romania au fost " + nrVoturiRomania + " voturi.");
 
                 for (Analiza analiza : listaAnaliza) {
                     int procentajRegiune = 0;
                     int procentajCandidat = 0;
                     procentajRegiune = (analiza.listaCandidatiRegiune.size() * 100) / nrVoturiRomania;
                     procentajCandidat = (analiza.listaVoturi.get(1).getNrVoturiCirc() * 100) / analiza.listaCandidatiRegiune.size();
-                    System.out.println("in " + analiza.getNumeRegiune() + " au fost " + analiza.listaCandidatiRegiune.size() + " voturi din " + nrVoturiRomania + ". Adica " + procentajRegiune + "%. Cele mai multe voturi au fost stranse de " + analiza.listaVoturi.get(1).candidat.getCNP()  +  analiza.listaVoturi.get(1).candidat.getNume() + ". Acestea constituie " + procentajCandidat + "% din voturile regiunii.");
+                    System.out.println("In " + analiza.getNumeRegiune() + " au fost " + analiza.listaCandidatiRegiune.size() + " voturi din " + nrVoturiRomania + ". Adica " + procentajRegiune + "%. Cele mai multe voturi au fost stranse de " + analiza.listaVoturi.get(1).candidat.getCNP()  +  analiza.listaVoturi.get(1).candidat.getNume() + ". Acestea constituie " + procentajCandidat + "% din voturile regiunii.");
                 }
 
 
@@ -522,7 +522,7 @@ public class Alegeri {
 
                 System.out.println("Fraude comise:");
                 for (int i = a.listaFraude.size() - 1; i > 0; i--) {
-                    System.out.println("in " + a.listaFraude.get(i).circumscriptie.getNume() + ": " + a.listaFraude.get(i).votant.getCNP() +  a.listaFraude.get(i).votant.getNume());
+                    System.out.println("In " + a.listaFraude.get(i).circumscriptie.getNume() + ": " + a.listaFraude.get(i).votant.getCNP() +  a.listaFraude.get(i).votant.getNume());
                 }
 
             }
