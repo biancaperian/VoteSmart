@@ -120,6 +120,11 @@ public class App {
                 alegeri.analizaDetaliataPlanNational(alegeri.listaAlegeri, id);
             }
 
+            if (nrTask == 15) {
+                String id = scanner.nextLine();
+                alegeri.raportFraude(alegeri.listaAlegeri, id);
+            }
+
             if (nrTask == 18) {
                 break;
             }

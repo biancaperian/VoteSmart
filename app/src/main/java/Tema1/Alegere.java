@@ -9,6 +9,7 @@ public class Alegere {
 
     ArrayList<Circumscriptie> listaCircumscriptii =  new ArrayList();
     ArrayList<Candidat> listaCandidati =  new ArrayList();
+    ArrayList<Frauda> listaFraude =  new ArrayList();
 
     public String getCurent() {
         return curent;

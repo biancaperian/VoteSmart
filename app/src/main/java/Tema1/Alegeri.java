@@ -223,6 +223,7 @@ public class Alegeri {
                             if (votant.getCNP().trim().equals(CNP_votant.trim()) == true) {
                                 gasitVotant = true;
                                 if (votant.getVotat() == true) {
+                                   a.listaFraude.add(new Frauda(votant, circ));
                                     return "FRAUDA: Votantul cu CNP-ul " + CNP_votant + " a incercat sa comita o frauda. Votul a fost anulat.";
                                 }
                                 boolean gasitCandidat = false;
@@ -243,9 +244,15 @@ public class Alegeri {
                                 }
                             }
                         }
-
-                        if (gasitVotant == false) {
-                            return "FRAUDA: Votantul cu CNP-ul " + CNP_votant + " a incercat sa comita o frauda. Votul a fost anulat.";
+                        for (Circumscriptie circ2 : a.listaCircumscriptii) {
+                            for (Votant votant : circ2.listaVotanti) {
+                                if (votant.getCNP().trim().equals(CNP_votant.trim()) == true) {
+                                    if (gasitVotant == false) {
+                                        a.listaFraude.add(new Frauda(votant, circ));
+                                        return "FRAUDA: Votantul cu CNP-ul " + CNP_votant + " a incercat sa comita o frauda. Votul a fost anulat.";
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -498,6 +505,32 @@ public class Alegeri {
             System.out.println("EROARE: Nu exista alegeri cu acest id");
             return;
         }
+    }
+
+    public void raportFraude(ArrayList<Alegere> listaAlegeri, String id) {
+        for (Alegere a : listaAlegeri) {
+            if (a.getId().equals(id)) {
+                if (a.getCurent().equals("TERMINAT") == false) {
+                    System.out.println("EROARE: Inca nu s-a terminat votarea");
+                    return ;
+                }
+
+                if (a.listaFraude.size() == 0) {
+                    System.out.println("GOL: Romanii sunt cinstiti");
+                    return ;
+                }
+
+                System.out.println("Fraude comise:");
+                for (int i = a.listaFraude.size() - 1; i > 0; i--) {
+                    System.out.println("in " + a.listaFraude.get(i).circumscriptie.getNume() + ": " + a.listaFraude.get(i).votant.getCNP() +  a.listaFraude.get(i).votant.getNume());
+                }
+
+            }
+
+        }
+
+        System.out.println("EROARE: Nu exista alegeri cu acest id");
+        return;
     }
 
 }
