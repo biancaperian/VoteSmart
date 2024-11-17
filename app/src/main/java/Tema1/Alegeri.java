@@ -528,9 +528,33 @@ public class Alegeri {
             }
 
         }
-
         System.out.println("EROARE: Nu exista alegeri cu acest id");
         return;
     }
 
+    public void stergereAlegeri(ArrayList<Alegere> listaAlegeri, String id) {
+        for (Alegere a : listaAlegeri) {
+            if (a.getId().equals(id)) {
+                System.out.println("S-au sters alegerile" + a.getNume());
+                listaAlegeri.remove(a);
+                return ;
+            }
+        }
+
+        System.out.println("EROARE: Nu exista alegeri cu acest id");
+        return ;
+    }
+
+    public void listaAlegeri(ArrayList<Alegere> listaAlegeri) {
+        if (listaAlegeri.size() == 0) {
+            System.out.println("GOL: Nu sunt alegeri");
+            return ;
+        }
+
+        System.out.println("Alegeri:");
+        for (Alegere a : listaAlegeri) {
+            System.out.println(a.getId() + a.getNume());
+        }
+
+    }
 }

@@ -125,6 +125,15 @@ public class App {
                 alegeri.raportFraude(alegeri.listaAlegeri, id);
             }
 
+            if (nrTask == 16) {
+                String id = scanner.nextLine();
+                alegeri.stergereAlegeri(alegeri.listaAlegeri, id);
+            }
+
+            if (nrTask == 17) {
+                alegeri.listaAlegeri(alegeri.listaAlegeri);
+            }
+
             if (nrTask == 18) {
                 break;
             }
