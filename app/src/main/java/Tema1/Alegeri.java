@@ -5,6 +5,7 @@ import java.util.Collections;
 
 public class Alegeri {
     ArrayList<Alegere> listaAlegeri = new ArrayList<Alegere>();
+    ArrayList<Analiza> listaAnaliza = new ArrayList<Analiza>();
     
 
     public String adaugareAlegere(ArrayList<Alegere> listaAlegeri, String id, String nume) {
@@ -413,6 +414,90 @@ public class Alegeri {
             }
         }
         return "EROARE: Nu exista alegeri cu acest id";
+    }
+
+    public void analizaDetaliataPlanNational(ArrayList<Alegere> listaAlegeri, String id) {
+       boolean gasitId = false;
+        for (Alegere a : listaAlegeri) {
+            if (a.verificareId(id) == 1) {
+                gasitId = true;
+                if (a.getCurent().equals("TERMINAT") == false) {
+                    System.out.println("EROARE: Inca nu s-a terminat votarea");
+                    return ;
+                }
+
+                int numarVoturi = 0;
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    for (Candidat candidat : circ.listaCandidatiVotati) {
+                        numarVoturi++;
+                    }
+                }
+
+                if (numarVoturi == 0) {
+                    System.out.println("GOL: Lumea nu isi exercita dreptul de vot in Romania");
+                    return ;
+                }
+
+                for (Circumscriptie circ : a.listaCircumscriptii) {
+                    boolean gasitRegiune = false;
+                    for (Analiza analiza : listaAnaliza) {
+                        if (circ.getRegiune().equals(analiza.getNumeRegiune()) ==  true) {
+                            gasitRegiune = true;
+                            analiza.listaCandidatiRegiune.addAll(circ.listaCandidatiVotati);
+
+                        }
+                    }
+
+                    if (gasitRegiune == false) {
+                        Analiza analizaNoua = new Analiza(circ.getRegiune());
+                        listaAnaliza.add(analizaNoua);
+                        analizaNoua.listaCandidatiRegiune.addAll(circ.listaCandidatiVotati);
+                    }
+                }
+
+                for (Analiza analiza : listaAnaliza) {
+                    for (Candidat candidat : analiza.listaCandidatiRegiune) {
+                        boolean gasitCandidat = false;
+                        for (Vot vot : analiza.listaVoturi) {
+                            if (candidat.getNume().trim().equals(vot.candidat.getNume().trim()) == true) {
+                                gasitCandidat = true;
+                                vot.adaugaVotCirc();
+                                break;
+                            }
+                        }
+                        if (gasitCandidat == false) {
+                            Vot votNou = new Vot(candidat);
+                            analiza.listaVoturi.add(votNou);
+                            votNou.adaugaVotCirc();
+                        }
+
+                        Collections.sort(analiza.listaVoturi);
+                    }
+                }
+
+                int nrVoturiRomania = 0;
+
+                for (Analiza analiza : listaAnaliza) {
+                    nrVoturiRomania = nrVoturiRomania + analiza.listaCandidatiRegiune.size();
+                }
+
+                System.out.println("in Romania au fost " + nrVoturiRomania + " voturi.");
+
+                for (Analiza analiza : listaAnaliza) {
+                    int procentajRegiune = 0;
+                    int procentajCandidat = 0;
+                    procentajRegiune = (analiza.listaCandidatiRegiune.size() * 100) / nrVoturiRomania;
+                    procentajCandidat = (analiza.listaVoturi.get(1).getNrVoturiCirc() * 100) / analiza.listaCandidatiRegiune.size();
+                    System.out.println("in " + analiza.getNumeRegiune() + " au fost " + analiza.listaCandidatiRegiune.size() + " voturi din " + nrVoturiRomania + ". Adica " + procentajRegiune + "%. Cele mai multe voturi au fost stranse de " + analiza.listaVoturi.get(1).candidat.getCNP()  +  analiza.listaVoturi.get(1).candidat.getNume() + ". Acestea constituie " + procentajCandidat + "% din voturile regiunii.");
+                }
+
+
+            }
+        }
+        if (gasitId == false) {
+            System.out.println("EROARE: Nu exista alegeri cu acest id");
+            return;
+        }
     }
 
 }

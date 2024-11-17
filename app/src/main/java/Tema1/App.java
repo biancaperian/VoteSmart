@@ -115,6 +115,11 @@ public class App {
                 System.out.println(alegeri.analizaDetaliataCircumscriptie(alegeri.listaAlegeri, id, numeCirc));
             }
 
+            if (nrTask == 14) {
+                String id = scanner.nextLine();
+                alegeri.analizaDetaliataPlanNational(alegeri.listaAlegeri, id);
+            }
+
             if (nrTask == 18) {
                 break;
             }
