@@ -1,5 +1,11 @@
 package Tema1;
 
+/**
+ * Clasa Votant extinde clasa abstracta Persoana si adauga caracteristici
+ * specifice unui votant, cum ar fi un atribut "neindemanatic" si o stare
+ * boolean care  indica daca a votat sau nu.
+ */
+
 public class Votant extends Persoana{
     private String neindemanatic;
     private boolean votat;

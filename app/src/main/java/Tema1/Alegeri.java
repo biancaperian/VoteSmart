@@ -3,11 +3,23 @@ package Tema1;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Clasa Alegeri gestioneaza functionalitatile principarle ale procesului
+ * electoral.
+ */
+
 public class Alegeri {
     ArrayList<Alegere> listaAlegeri = new ArrayList<Alegere>();
     ArrayList<Analiza> listaAnaliza = new ArrayList<Analiza>();
-    
 
+    /**
+     * Creeaza o noua alegere si daca aceasta nu exista deja o adauga
+     * la lista de alegeri.
+     * @param listaAlegeri - Lista de alegeri existente.
+     * @param id - Identificatorul alegerii.
+     * @param nume - numele alegerii.
+     * @return Mesaj de succes sau eroare daca s-a adaugat sau nu alegerea.
+     */
     public String adaugareAlegere(ArrayList<Alegere> listaAlegeri, String id, String nume) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -19,6 +31,13 @@ public class Alegeri {
         return "S-au creat alegerile" + nume + "\n";
     }
 
+    /**
+     * Verifica daca o anumita alegere este in stadiul "IN_CURS",
+     * in caz contrar le porneste.
+     * @param listaAlegeri - lista de alegeri existente.
+     * @param id - Identificatorul alegerii.
+     * @return Mesaj de succes sau de eroare.
+     */
     public String verificarePornireAlegere(ArrayList<Alegere> listaAlegeri, String id) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -35,6 +54,14 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Adauga o circumscriptie, daca aceasta nu exista deja, la o alegere specificata.
+     * @param listaAlegeri - Lista de alegeri existente.
+     * @param id - Identificatorul alegerii in care vrem sa aduagam circumscriptia.
+     * @param numeCirc - Numele circumscriptiei.
+     * @param numeRegiune - Numele regiunii.
+     * @return Mesaj de succes sau de eroare.
+     */
     public String verificareIdAdaugareCircumscriptie(ArrayList<Alegere> listaAlegeri, String id, String numeCirc, String numeRegiune) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -45,6 +72,13 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Elimina o circumscriptie, daca aceasta exista, dintr-o alegere specificata.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii din care dorim sa stergem circumscriptia.
+     * @param numeCirc - Numele circumscriptiei.
+     * @return Mesaj de eroare sau de succes.
+     */
     public String verificareIdEliminareCircumscriptie(ArrayList<Alegere> listaAlegeri, String id, String numeCirc) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -55,6 +89,15 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Adauga un candidat la alegerile specificate.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii.
+     * @param CNP - Codul numeric personalal candidatului.
+     * @param varsta - Varsta candidatului.
+     * @param nume - Numele candidatului.
+     * @return Mesaj de succes sau de eroare.
+     */
     public String adaugareCandidat (ArrayList<Alegere> listaAlegeri, String id, String CNP, int varsta, String nume) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -84,6 +127,13 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Elimina un candidat dintr-o alegere specifica.
+     * @param listaAlegeri -Lista alegerilor existente.
+     * @param id - Identificatorul alegerii.
+     * @param CNP - Codul Numeric Personal al candidatului.
+     * @return Un mesaj de eroare sau de succes.
+     */
     public String eliminareCandidat(ArrayList<Alegere> listaAlegeri, String id, String CNP) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -104,6 +154,17 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Adauga un nou votant la o alegere specificata.
+     * @param listaAlegeri - Lista de alegeri existente.
+     * @param id - Identificatorul alegerii la care dorim sa adaugam votantul.
+     * @param numeCirc - Numele circumscriptiei unde vrem sa adaugam votantul.
+     * @param CNP - Codul Numeric Personal al votantului.
+     * @param varsta -  Varsta votantului.
+     * @param neindemanatic - Indicator daca votantul este neindemanatic sau nu.
+     * @param nume - Numele votantului.
+     * @return Mesaj de erooare sau de succes.
+     */
     public String adaugareVotant(ArrayList<Alegere> listaAlegeri, String id, String numeCirc, String CNP, int varsta, String neindemanatic, String nume) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -138,6 +199,11 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Afiseaza lista candidatilor dintr-o alegere specificata.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii din care afisam lista candidatilor.
+     */
     public void printareCandidatiDinAlegeri(ArrayList<Alegere> listaAlegeri, String id) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -161,6 +227,12 @@ public class Alegeri {
         return ;
     }
 
+    /**
+     * Printeaza votantii dintr-o circumscriptie specificata.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id -  Identificatorul alegerii cae contine circumscriptia dorita.
+     * @param numeCirc - Numele circumscriptiei.
+     */
     public void printareVotantiDinCircumscriptie(ArrayList<Alegere> listaAlegeri, String id, String numeCirc) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -194,6 +266,15 @@ public class Alegeri {
         return ;
     }
 
+    /**
+     * Permite unui votant sa voteze pentru un candidat intr-o anumita circumscriptie.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id -  Identificatorul alegeroo in care se desfasoara votarea.
+     * @param numeCirc - Numele circumscriptiei unde are loc votarea.
+     * @param CNP_votant - Codul Numeric Personal al votantuluo care doreste sa voteze.
+     * @param CNP_candidat - Codul Numeric Personal al canditatului pentru care voteaza
+     * @return Mesaj de succes sau de eroare.
+     */
     public String votare(ArrayList<Alegere> listaAlegeri, String id, String numeCirc, String CNP_votant, String CNP_candidat) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -266,6 +347,12 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Opreste procesul de votare pentru o alegere specificata.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii pe care ne dorim sa o oprim.
+     * @return Mesaj de eroare sau de succes.
+     */
     public String oprireAlegeri(ArrayList<Alegere> listaAlegeri, String id) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -280,6 +367,12 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Genereaza un raport al voturilor pentru o circumscriptie specificata.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii care contine circumscriptia dorita.
+     * @param numeCirc - Numele circumscriptiei
+     */
     public void raportVoturi(ArrayList<Alegere> listaAlegeri, String id, String numeCirc) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -337,6 +430,11 @@ public class Alegeri {
         return ;
     }
 
+    /**
+     * Genereaza un raport al voturilor la nivel national pentru o alegere specificata.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii pentru care generam raportul national.
+     */
     public void raportVoturiNationale(ArrayList<Alegere> listaAlegeri, String id) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -371,6 +469,13 @@ public class Alegeri {
         return ;
     }
 
+    /**
+     * Ofera o analiza detaliata a rezultatelor votarii intr-o circumscriptie specificata.
+     * @param listaAlegeri - Lista alegerilor disponibile.
+     * @param id - Identificatorul alegerii care contine circumsriptis dorita.
+     * @param numeCirc - Numele circumscriptiei.
+     * @return Mesaj cu detalii despre analiza efectuata sau eroare.
+     */
     public String analizaDetaliataCircumscriptie(ArrayList<Alegere> listaAlegeri, String id, String numeCirc) {
         for (Alegere a : listaAlegeri) {
             if (a.verificareId(id) == 1) {
@@ -423,6 +528,11 @@ public class Alegeri {
         return "EROARE: Nu exista alegeri cu acest id";
     }
 
+    /**
+     * Ofera o analiza detaliata a rezultatelor votarii la nivel national.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii pentru care se face analiza nationala.
+     */
     public void analizaDetaliataPlanNational(ArrayList<Alegere> listaAlegeri, String id) {
        boolean gasitId = false;
         for (Alegere a : listaAlegeri) {
@@ -507,6 +617,11 @@ public class Alegeri {
         }
     }
 
+    /**
+     * Genereaza un raport al fraudelor comise in cadrul unei alegeri specificate.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii pentru care se genereaza raportul de fraude.
+     */
     public void raportFraude(ArrayList<Alegere> listaAlegeri, String id) {
         for (Alegere a : listaAlegeri) {
             if (a.getId().equals(id)) {
@@ -532,6 +647,11 @@ public class Alegeri {
         return;
     }
 
+    /**
+     * Sterge o alegere specificata din lista de alegeri, daca aceasta exista.
+     * @param listaAlegeri - Lista alegerilor existente.
+     * @param id - Identificatorul alegerii cpe care ne dorim sa o stergem.
+     */
     public void stergereAlegeri(ArrayList<Alegere> listaAlegeri, String id) {
         for (Alegere a : listaAlegeri) {
             if (a.getId().equals(id)) {
@@ -545,6 +665,10 @@ public class Alegeri {
         return ;
     }
 
+    /**
+     * Afiseaza lista tuturor alegerilor existente.
+     * @param listaAlegeri - Lista de alegeri disponibila.
+     */
     public void listaAlegeri(ArrayList<Alegere> listaAlegeri) {
         if (listaAlegeri.size() == 0) {
             System.out.println("GOL: Nu sunt alegeri");

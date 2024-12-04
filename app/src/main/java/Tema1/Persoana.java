@@ -1,5 +1,11 @@
 package Tema1;
 
+/**
+ * Clasa abstracta Persoana contine informatii de baza despre
+ * o persoana, cum ar fi: numele, CNP-ul si varsta.
+ * Este utilizata ca baza pentru alte clase (CN=andidat si Votant) care
+ * vot extinde aceasta clasa.
+ */
 public abstract class Persoana {
     private String nume;
     private String CNP;
@@ -37,6 +43,4 @@ public abstract class Persoana {
     public void setVarsta(int varsta) {
         this.varsta = varsta;
     }
-
-
 }

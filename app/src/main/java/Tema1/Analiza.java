@@ -2,6 +2,13 @@ package Tema1;
 
 import java.util.ArrayList;
 
+/**
+ * Clasa Analiza reprezinta o componenta pentru analizarea rezultatelor
+ * dintr-o anumita regiune in cadrul unei alegeri. Include informatii
+ * despre numele regiunii, lista candidatilor din regiune si lista voturilor.
+ */
+
+
 public class Analiza {
     private String numeRegiune;
     ArrayList<Candidat> listaCandidatiRegiune;
@@ -25,6 +32,4 @@ public class Analiza {
     public void setNumeRegiune(String numeRegiuna) {
         this.numeRegiune = numeRegiuna;
     }
-
-
 }

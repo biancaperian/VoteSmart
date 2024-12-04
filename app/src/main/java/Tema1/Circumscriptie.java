@@ -2,6 +2,11 @@ package Tema1;
 
 import java.util.ArrayList;
 
+/**
+ * Clasa Circumsriptie contine informatii despre numele si regiunea
+ * circumscriptiei, precum si liste cu votanti, candidati si voturi.
+ */
+
 public class Circumscriptie {
     private String nume;
     private String regiune;
@@ -35,9 +40,5 @@ public class Circumscriptie {
     public void setRegiune(String regiune) {
         this.regiune = regiune;
     }
-
-
-
-
 }
 
